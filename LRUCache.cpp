@@ -16,20 +16,26 @@ public:
 
     // Unordered Map in STL is implemented as hash Table
     unordered_map<int, int > umap; 
+    
+    // MAX size of LRU Cache
     int size;
 
     LRUCache(int capacity) {
         size = capacity;
     }
     
+	// Read the entry from Cache
+	
     int get(int key) {
 
 
-        // Read the entry from Map
+        // Key is present in Cache
         if (umap.find(key)!= umap.end())
             {
                 // Take the key out of doubly linkedlist and 
-                // Update position in Doubly linked List
+                // Update position in Doubly linked List i.e
+                // place it in the front. 
+                // Finally return the value coressponding to the key 
                 myList.remove(key);
                 myList.push_front(key);
                 return umap[key];
@@ -49,29 +55,29 @@ public:
         // If Linklist is full. Remove the element from
         // the back which is going to be least recently used.
         if ( umap.size() == size && umap.find(key) == umap.end())
-        {
-            umap.erase(myList.back());
-            myList.pop_back();
-        }
+        	{
+	            umap.erase(myList.back());
+	            myList.pop_back();
+        	}
       
 
         // If key already exists 
 
         if (umap.find(key) != umap.end())
-        {
+        	{
+	            umap.erase(key);
+	            umap.insert({key, value});
+	            myList.remove(key);
+	            myList.push_front(key);
+        	}
 
-            umap.erase(key);
-            umap.insert({key, value});
-            myList.remove(key);
-            myList.push_front(key);
-        }
-
-        else {
-        // Add at the key value pair in map
-        umap.insert({key, value});
-        // Add the entry in fromt of linkedlist
-        myList.push_front(key);
-        }
+        else 
+			{
+		        // Add at the key value pair in map
+		        umap.insert({key, value});
+		        // Add the entry in fromt of linkedlist
+		        myList.push_front(key);
+        	}
         
     }
 };
@@ -85,11 +91,13 @@ int main()
     // Create Cache Object
     LRUCache* obj = new LRUCache(capacity);
 
-    obj->put(2,3);
+	// Add key pair value in cache
+	obj->put(2,3);
     obj->put(4,7);
     obj->put(6,11);
     obj->put(8,13);
 
+	// Retrieve key pair value from chache
     cout << "value is : "<<  obj->get(17) << "\n";
     cout << "value is : "<<  obj->get(4) << "\n";
     cout << "value is : "<<  obj->get(6) << "\n";
