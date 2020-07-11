@@ -6,7 +6,6 @@
 using namespace std;
 
 class LRUCache {
-
 public:
 	
     // Doubly LinkedList STL
@@ -26,8 +25,6 @@ public:
 	
     int get(int key) 
 	{
-
-
         // Key is present in Cache
         if (umap.find(key)!= umap.end())
             {
@@ -48,9 +45,9 @@ public:
 
     }
     
-    void put(int key, int value) {
-
-        
+    void put(int key, int value) 
+	{
+    	
         // If Linklist is full. Remove the element from
         // the back which is going to be least recently used.
         if ( umap.size() == size && umap.find(key) == umap.end())
