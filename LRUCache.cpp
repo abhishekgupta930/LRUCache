@@ -5,12 +5,10 @@
 
 using namespace std;
 
-
 class LRUCache {
 
 public:
-
-
+	
     // Doubly LinkedList STL
     list<int> myList;
 
@@ -26,7 +24,8 @@ public:
     
 	// Read the entry from Cache
 	
-    int get(int key) {
+    int get(int key) 
+	{
 
 
         // Key is present in Cache
@@ -60,7 +59,6 @@ public:
 	            myList.pop_back();
         	}
       
-
         // If key already exists 
 
         if (umap.find(key) != umap.end())
@@ -77,8 +75,7 @@ public:
 		        umap.insert({key, value});
 		        // Add the entry in fromt of linkedlist
 		        myList.push_front(key);
-        	}
-        
+        	} 
     }
 };
 
